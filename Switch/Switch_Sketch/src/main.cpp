@@ -17,7 +17,7 @@
 
 // Uncomment if a display is used to show the state. A push button on IO14, connected to GND will activate the display
 // Default: Uncommented
-#define USE_DISPLAY // Uncomment to use a 128x64 OLED display
+// #define USE_DISPLAY // Uncomment to use a 128x64 OLED display
 
 // Time in seconds the display stays on
 // Default: 60
