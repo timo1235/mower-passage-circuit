@@ -13,7 +13,7 @@
 // Debugging. If enabled, the sketch will print DEBUGGING states to the serial monitor
 // with 115200 Baudrate
 // Default: commented
-#define DEBUGGING // Uncomment to output DEBUGGING messages
+// #define DEBUGGING // Uncomment to output DEBUGGING messages
 
 // Mac-Adress of the mower. This is the most important part and has to match the defined Mac-Adress in the Passage ESP32 sketch,
 // otherwise a communication is not possible. Only needs to be changed, if there are other ESP32 Mowers in the neighborhood
