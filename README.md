@@ -11,9 +11,9 @@ google if you dont know how.
 
 ## Wiring
 ### Mower
-[Mower wiring](Mower/mower_connectio_scheme.jpg "Mower connection scheme")
+![Mower wiring](Mower/mower_connectio_scheme.jpg "Mower connection scheme")
 ### Switch box
-[Switch box wiring](Switch/switch_connection_scheme.jpg "Switch connection scheme")
+![Switch box wiring](Switch/switch_connection_scheme.jpg "Switch connection scheme")
 
 ## Debugging
 If having any troubles with the functionalities not working, you can uncomment the debugging line and watch the serial monitor for debug output:
