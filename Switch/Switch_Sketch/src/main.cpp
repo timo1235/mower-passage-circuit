@@ -158,9 +158,10 @@ void goToSleep(uint16_t intveral_s = SLEEP_TIME_S)
 {
 #ifdef USE_SLEEP
     // Only sleep if display is off
+    #ifdef USE_DISPLAY
     if (!displayState)
     {
-
+    #endif
 #ifdef DEBUGGING
         Serial.print("Going to sleep/delay " + String(intveral_s) + "s now, time awake: ");
         Serial.print(millis() - awakeTime);
@@ -173,7 +174,9 @@ void goToSleep(uint16_t intveral_s = SLEEP_TIME_S)
         esp_wifi_stop();
         // esp_sleep_enable_timer_wakeup(intveral_s * 1000000);
         esp_deep_sleep(intveral_s * 1000000);
+    #ifdef USE_DISPLAY
     }
+    #endif
 #endif
 }
 
@@ -323,7 +326,7 @@ void OnDataSent(const uint8_t *address, esp_now_send_status_t status)
         }
     }
 }
-
+#ifdef USE_DISPLAY
 void displayStart()
 {
 #ifdef DEBUGGING
@@ -374,6 +377,7 @@ void updateDisplay()
 #endif
     }
 }
+#endif
 
 void setupWifi()
 {
@@ -434,7 +438,9 @@ void checkWakeUpReason()
     wakeup_reason = esp_sleep_get_wakeup_cause();
     if (wakeup_reason == ESP_SLEEP_WAKEUP_EXT0)
     {
+        #ifdef USE_DISPLAY
         displayStart();
+        #endif
     }
 }
 
@@ -495,9 +501,11 @@ void loop()
 
     // This code is only reached if the display is ON or the sleep mode is OFF, otherwise the esp32 goes to sleep before
     uint32_t interval = SLEEP_TIME_S * 1000;
+    #ifdef USE_DISPLAY
     // Increase message send interval time to see changes on the display
     if (displayState)
         interval = interval / 4;
+    #endif
     if (millis() - lastMessageToMover > interval)
     {
         sendMessageToMover();
