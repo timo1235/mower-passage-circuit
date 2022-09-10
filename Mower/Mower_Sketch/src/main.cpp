@@ -1,5 +1,5 @@
 /**
- * Mower Passage Mower Sketch v1.0
+ * Mower Passage Mower Sketch v1.1
  * find out more: blog.altholtmann.com
  * by Timo Altholtmann
  * 
@@ -43,6 +43,7 @@ const byte sensorVccPin = 25;
 const byte sensorGndPin = 26;
 const byte sensorPin = 33;
 const byte ledPin = LED_BUILTIN;
+float filterResult = 0.0;
 
 // programm vars
 uint32_t lastStateCheck_MS = 0;
@@ -167,6 +168,15 @@ void setUpWifi()
     esp_now_register_recv_cb(OnDataRecv);
 }
 
+// Funktion Filtern()                                            
+// Bildet einen Tiefpassfilter (RC-Glied) nach.           
+// FF = Filterfaktor;  Tau = FF / Aufruffrequenz            
+// FiltVal der gefilterte Wert, NewVal der neue gelesene Wert; FF Filterfaktor    
+void Filtern(float &FiltVal, float NewVal, int FF)
+{
+  FiltVal= ((FiltVal * FF) + NewVal) / (FF +1);  
+}
+
 void checkSensorState()
 {
     // Check the interval
@@ -183,12 +193,22 @@ void checkSensorState()
         float result = ((float)sum / (float)stateCheckSamples) / (float)(4040 / 15.7);
 
 #ifdef DEBUGGING
-        Serial.print("Voltage of the sensor pin: ");
+        Serial.print("current Voltage: ");
         Serial.print(result);
         Serial.print(" V - ");
+        Serial.print("\t");
 #endif
+        Filtern(filterResult, result, 8);
+
+#ifdef DEBUGGING
+        Serial.print("filtered Voltage: ");
+        Serial.print(filterResult);
+        Serial.print(" V - ");
+        Serial.print("\t");
+#endif
+        
         // Set state according to the voltage
-        if (result > 2)
+        if (filterResult > 1)
         {
             // Mower is mowing
             dataToPassage.moverState = 1;

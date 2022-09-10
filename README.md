@@ -23,3 +23,9 @@ If having any troubles with the functionalities not working, you can uncomment t
 // Default: commented
 #define DEBUGGING // Uncomment to output DEBUGGING messages
 ```
+
+## Changelog
+### v1.1
+- Try to fix and stabilize the detection of the mower, thx to Bernd Hörnig
+### v1.0
+- Initial Release
