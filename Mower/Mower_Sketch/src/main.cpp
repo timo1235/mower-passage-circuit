@@ -150,7 +150,6 @@ void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status)
 
 void setUpWifi()
 {
-    WiFi.enableLongRange(true);
     WiFi.mode(WIFI_STA);
 
     esp_wifi_set_ps(WIFI_PS_NONE);

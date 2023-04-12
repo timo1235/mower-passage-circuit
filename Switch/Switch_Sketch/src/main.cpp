@@ -13,11 +13,11 @@
 // Debugging. If enabled, the sketch will print DEBUGGING states to the serial monitor
 // with 115200 Baudrate
 // Default: commented
-// #define DEBUGGING // Uncomment to output DEBUGGING messages
+#define DEBUGGING // Uncomment to output DEBUGGING messages
 
 // Uncomment if a display is used to show the state. A push button on IO14, connected to GND will activate the display
 // Default: Uncommented
-// #define USE_DISPLAY // Uncomment to use a 128x64 OLED display
+#define USE_DISPLAY // Uncomment to use a 128x64 OLED display
 
 // Time in seconds the display stays on
 // Default: 60
@@ -381,7 +381,6 @@ void updateDisplay()
 
 void setupWifi()
 {
-    WiFi.enableLongRange(true);
     WiFi.mode(WIFI_STA);
 
     //Init ESP-NOW
